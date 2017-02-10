@@ -1,0 +1,80 @@
+---
+title: "Manuel d'utilisation"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Installation
+
+- [Installer R](https://cran.r-project.org/bin/windows/base/)
+- [Télécharger RStudio](https://www.rstudio.com/products/rstudio/download/) : Sous Windows, il faut télécharger le fichier .zip, dézipper l'archives et ouvrir le fichier rstudio.exe dans le sous-répertoire bin/. 
+
+## Import des données
+
+Pour importer des données, il faut convertir le fichier Excel au format CSV et enregistrer le fichier CSV dans le répertoire raw-data 
+
+```{r}
+library(PanoramaSI)
+library(dplyr)
+table_panorama <- import_table(path = "../raw-data/panorama_projets_si.csv", n = 56)
+```
+
+## Chiffres clés 
+
+```{r}
+duree_moyenne(table = table_panorama)
+```
+
+```{r}
+euros(table = table_panorama)
+```
+
+```{r}
+interministeriel(table = table_panorama)
+```
+
+```{r}
+n_projects(table = table_panorama)
+```
+
+## Générer les graphiques
+
+```{r}
+plot_tranchebudget(table = table_panorama)
+```
+
+
+```{r}
+plot_phase(table = table_panorama)
+```
+
+
+```{r}
+plot_budget(table = table_panorama)
+```
+
+```{r}
+plot_zone(table = table_panorama)
+```
+
+
+
+## Générer la table HTML
+
+```{r}
+make_html_table(table = table_panorama)
+```
+
+## Générer le site 
+
+```{r, eval=FALSE}
+library(rmarkdown)
+render(input = "index.Rmd")
+```
+
+

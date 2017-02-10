@@ -1,0 +1,256 @@
+---
+title: "Panorama des grands projets SI de l'État"
+output: 
+  flexdashboard::flex_dashboard:
+    favicon: img/marianne.png
+    vertical_layout: scroll
+    navbar:
+      - { title: "Data", icon: "fa-database", href: "https://www.data.gouv.fr/fr/datasets/panorama-des-grands-projets-si-de-letat-1/", target: "_blank"}
+params:
+  ecart_calendaire: ".38"
+  ecart_budgetaire: ".32"
+---
+
+Chiffres clés {data-icon="fa-tachometer" data-orientation="columns"}
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Présentation
+
+Issu d’une collaboration étroite entre la DINSIC et les ministères, le panorama des grands projets SI recense et décrit les principaux projets informatiques au sein de l’Etat.
+ 
+Tout citoyen dispose ainsi d'une vue sur les principaux efforts consentis par l'Etat pour moderniser son système d’information et engager une transformation numérique. 
+
+```{r setup, include=FALSE}
+Sys.setlocale(locale="fr_FR.UTF-8")
+options(OutDec = ",")
+library(flexdashboard)
+library(readr)
+library(knitr)
+library(dplyr)
+library(PanoramaSI)
+table_panorama <- import_table(path = "raw-data/panorama_projets_si.csv", n = 57)
+```
+
+### projets suivis {.value-box}
+
+```{r projects}
+valueBox(n_projects(table = table_panorama), 
+         icon = "fa-briefcase", 
+         color = palette_sgmap()[1])
+```
+
+### projets interministériels {.value-box}
+
+```{r interministeriel}
+valueBox(
+  interministeriel(table = table_panorama), 
+  icon = "fa-users", 
+  color = palette_phase()[2]
+  )
+```
+
+### milliards d'euros engagés {.value-box}
+
+```{r euros}
+valueBox(
+  euros(table = table_panorama), 
+  icon = "fa-eur", 
+  color = palette_sgmap()["violet"]
+  )
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### durée moyenne (en années) {.value-box}
+
+```{r dureemoyenne}
+valueBox(
+  duree_moyenne(table = table_panorama), 
+  icon = "fa-calendar", 
+  color = palette_phase()[4])
+```
+
+### taux d'écart calendaire moyen {.value-box}
+
+```{r calendaire}
+valueBox(
+  percent_formatting_fr(as.numeric(params$ecart_calendaire)), 
+  icon = "fa-calendar-times-o", 
+  color = palette_phase()[3]
+  )
+```
+
+### taux d'écart budgétaire moyen {.value-box}
+
+```{r ecartbudget}
+valueBox(
+  ecart_budgetaire <- percent_formatting_fr(as.numeric(params$ecart_budgetaire)), 
+  icon = "fa-calculator", 
+  color = palette_budget()[4]
+  )
+```
+
+### Répartition des projets par budget {.no-mobile}
+
+```{r tranches}
+plot_tranchebudget(table=table_panorama)
+```
+
+Analyse {data-orientation="columns" data-icon="fa-bar-chart"}
+===================================== 
+
+Column {data-width=500}
+-------------------------------------
+
+### Répartition des projets par ministère et par phase d'avancement {.no-padding}
+
+```{r phases}
+plot_phase(table = table_panorama)
+```
+
+### Répartition des projets par ministère et par budget {.no-padding}
+
+```{r budget}
+plot_budget(table = table_panorama)
+```
+      
+Column {data-width=500}
+-------------------------------------
+
+### Répartition des projets par zone fonctionnelle {.no-padding}
+
+```{r zones}
+plot_zone(table = table_panorama)
+```
+
+> <a href="https://references.modernisation.gouv.fr/urbanisation-du-systeme-dinformation-de-letat" target="_blank" title="Urbanisation du système d'information de l'Etat">En savoir plus</a>
+
+Projets {data-icon="fa-list"}
+=====================================
+
+Row {data-height=1000}
+-------------------------------------
+
+### Explorez les projets
+
+```{r dt, echo=FALSE, warning=FALSE, message=FALSE}
+make_html_table(table = table_panorama)
+```
+
+FAQ {data-icon="fa-question" data-orientation="columns"}
+=====================================
+
+### Général
+
+1. **Qu’est-ce que le panorama des grands projets du système d’information (SI) de l’Etat et que contient-il ?**
+
+Le panorama recense et décrit les principaux projets informatiques en cours au sein de l’Etat. Pour chacun d’eux, il présente un état des lieux&#8239;: état d’avancement, coût estimé , durée prévisionnelle…
+
+Il propose également une vue synthétique de l’ensemble de ces grands projets avec, notamment, leur durée moyenne, les taux d’écart calendaire et budgétaire moyens par rapport aux prévisions initiales, la répartition par ministère, par budget, par zone fonctionnelle…
+
+Ce panorama est avant tout un outil de pilotage interne, permettant de suivre et sécuriser les grands projets SI de l’Etat.
+
+2. **Quels projets y figurent ?**
+
+Le panorama inclut en priorité les projets du <a href="https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000029337021" target="_blank" title="Décret n° 2014-879">système d’information de l’Etat</a> qui requièrent une vigilance et un suivi particuliers en raison de leurs impacts, de leur degré de complexité et/ou de leurs enjeux financiers.
+
+Il s’agit ainsi notamment des projets&#8239;:
+
+- impactant significativement les usagers, les ministères ou leurs agents&#8239;;
+- ayant un contenu et/ou une gestion complexe ou des risques majeurs identifiés&#8239;;
+- visant des économies substantielles ou entraînant des dépenses supérieures à 9M€. 
+
+La première édition du panorama, publiée en novembre 2016, contient 57 projets.
+
+3. **Comment est établi ce panorama ?**
+
+Le panorama est issu d’une collaboration étroite entre les ministères et la direction interministérielle du numérique et du système d’information et de communication de l’Etat (DINSIC), au sein du secrétariat général pour la modernisation de l’action publique (SGMAP).
+
+Chaque ministère identifie, parmi les projets qu’il porte, ceux répondant aux critères (Cf. question 2). La DINSIC recueille, dans un cadre homogène, les données de ces projets afin de les publier sur <a href="http://modernisation.gouv.fr/" target="_blank" title="Portail de la modernisation de l'action publique">modernisation.gouv.fr</a> et <a href="https://www.data.gouv.fr/fr/" titre="data.gouv.fr" target="_blank">data.gouv.fr</a>.
+
+Les données du panorama sont actualisées plusieurs fois par an.
+
+### Contexte et objectif 
+
+4. **Dans quel contexte ce panorama a-t-il été mis en place ?**
+
+L'Etat est engagé dans une démarche de modernisation en profondeur des systèmes d’information des administrations, au bénéfice des usagers comme des agents et dans une optique d’optimisation des dépenses. Pour gagner en efficacité et efficience, il a instauré à travers le <a href="https://www.legifrance.gouv.fr/affichTexte.do;jsessionid=17BAD420544A1B373E5FB2913C908A1B.tpdila10v_1?cidTexte=JORFTEXT000029337021&dateTexte=20140806" target="_blank" title="décret n° 2014-879 du 1er août 2014">décret n° 2014-879 du 1er août 2014</a>, un système d’information unique de l’Etat, placé sous l’autorité du Premier ministre.
+
+Son pilotage a été confié à la direction interministérielle du numérique et du système d’information et de communication de l’Etat (DINSIC) une direction du secrétariat général pour la modernisation de l’action publique (SGMAP). La DINSIC a alors été chargée de doter le gouvernement des instruments nécessaires au pilotage – notamment financier – du SI de l'Etat.
+
+Dans ce cadre, le Premier ministre a demandé à la DINSIC, dans une <a href="http://circulaires.legifrance.gouv.fr/pdf/2015/01/cir_39141.pdf" target="_blank" title="circulaire de janvier 2015">circulaire de janvier 2015</a>, de bâtir un tableau de bord des grands projets SI dans les ministères, en précisant que ces projets devront faire «&#8239;l’objet d’une vigilance accrue et d’une sécurisation de la part de la DINSIC&#8239;». Le panorama publié ici en est la concrétisation.
+
+5. **Pourquoi rendre public ce panorama ?**
+
+Une politique ambitieuse est engagée en France depuis deux ans en matière de transparence démocratique, de redevabilité et de participation des citoyens à l’action publique, notamment dans le cadre du <a href="https://www.etalab.gouv.fr/ogp" target="_blank" title="Partenariat our un gouvernement ouvert">Partenariat pour un gouvernement ouvert</a>, dont la France a pris la présidence en septembre 2016. 
+
+La publication du panorama des grands projets du système d’information de l’Etat s’inscrit dans cette volonté de transparence de l’action de l’action publique.
+
+6. **À qui s’adresse ce panorama et à quoi sert-il ?**
+
+Initialement, ce panorama est destiné au Premier ministre. Il lui permet ainsi qu’à ses services (DINSIC) et aux directions des systèmes d’information (DSI) ministérielles d’identifier et d’engager les actions nécessaires au succès des projets SI. 
+ 
+Le fait de rendre ce panorama public sert également différents publics et objectifs&#8239;:
+
+- les usagers qui souhaitent être plus informés sur la transformation publique et pouvoir juger de son efficacité&#8239;;
+- les agents publics et plus particulièrement les acteurs de ces grands projets pour témoigner de l’importance de leur contribution&#8239;;
+- l’administration pour témoigner de la transformation numérique en marche : dématérialisation, relation usagers, identité numérique, solutions collaboratives, mobilité, «&#8239;big data&#8239;»…
+- le gouvernement pour faciliter la lisibilité et la transparence de l’action publique et de ses grands projets SI&#8239;;
+- les fournisseurs (notamment les entreprises de services numériques) pour anticiper et mieux comprendre les besoins de l’Etat.
+
+### Aide à la lecture
+
+7. **A quoi correspondent les principaux chiffres clés ?**
+
+```{r}
+tibble::tribble(
+  ~Nom, ~Description,
+  "Nombre de projets référencés dans le panorama", "Nombre total de projets présents dans la dernière actualisation de ce panorama.",
+  "Nombre de projets interministériels", "Nombre de projets bénéficiant à plusieurs ministères.",
+  "Millions d’euros engagés", "Total (somme) des coûts prévisionnels pour l’ensemble des projets présents dans le panorama (hors projets en cadrage). Les coûts prévisionnels sont calculés en coût complet (cf. question 10).", 
+  "Durée moyenne (en années)", "Moyenne des durées de l’ensemble des projets présents dans le panorama.", 
+  "Taux d’écart calendaire moyen", "Moyenne des taux d’écart calendaire pour l’ensemble des projets présents dans le panoramaet en lien avec les <a href=\"http://www.performance-publique.budget.gouv.fr/sites/performance_publique/files/files/circulaires/pieces_jointes/2016/1BLF-16-3278/1BLF-16-3278_guide_performance.pdf\" target=\"_blank\" titre=\"Guide de la performance\">indicateurs de respect des coûts et délais des grands projets</a> des <a href=\"http://www.performance-publique.budget.gouv.fr/budget-comptes-etat/volet-performance-budget-etat/approfondir/fondamentaux/projets-annuels-performances-pap#.V9GPt7PStFQ\" target=\"_blank\" titre=\"Les projets annuels de performances (PAP)\">projets annuels de performances</a>.", 
+  "Taux d’écart budgétaire moyen", "Moyenne des taux d’écart budgétaire pour l’ensemble des projets présents dans le panorama et en lien avec les <a href=\"http://www.performance-publique.budget.gouv.fr/sites/performance_publique/files/files/circulaires/pieces_jointes/2016/1BLF-16-3278/1BLF-16-3278_guide_performance.pdf\" titre=\"Guide de la performance\" target=\"_blank\">indicateurs de respect des coûts et délais des grands projets</a> des <a href=\"http://www.performance-publique.budget.gouv.fr/budget-comptes-etat/volet-performance-budget-etat/approfondir/fondamentaux/projets-annuels-performances-pap#.V9GP6bPStFS\" titre=\"Les projets annuels de performances (PAP)\" target=\"_blank\">projets annuels de performances</a>."
+) %>% 
+  knitr::kable(.)
+```
+
+### Comprendre les données des projets 
+
+9. **Quelles sont les données présentées par projet ?**
+
+Chaque projet est décrit en dix points&#8239;: nom du projet, description et objectifs, ministère porteur, date de début, durée prévisionnelle, phase en cours, coût estimé, caractère interministériel, zone fonctionnelle principale (en relation avec le plan d’occupation des sols), programme de financement et lien avec les derniers projets annuels de la performance.
+
+Ce panorama a été réalisé au moyen d’une agrégation de données de façon à respecter les dispositions de l’article L. 312-1 du code des relations entre le public et l’administration.
+
+10. **Comment sont calculés les coûts estimés affichés dans ce panorama ?**
+
+Les modalités de calcul des coûts des projets SI sont précisées dans l’<a href="https://www.legifrance.gouv.fr/eli/arrete/2014/11/14/PRMJ1426337A/jo" titre="Arrêté du 14 novembre 2014" target="_blank">arrêté du 14 novembre 2014</a> (article 2) relatif au système d’information et de communication de l’Etat. Ils prennent en compte les coûts initiaux de fabrication (dont la masse salariale) auxquels sont ajoutés les coûts de deux années de fonctionnement&#8239;: c’est ce qu’on appelle le coût complet.
+
+11. **A quoi correspondent les phases des projets ?**
+
+Un projet passe par quatre phases principales&#8239;:
+
+- Cadrage&#8239;: l’opportunité et la faisabilité du projet sont à l’étude&#8239;; les grands investissements ne sont pas encore lancés à ce stade&#8239;;
+- Conception/Réalisation&#8239;: la solution est en cours de construction&#8239;;
+- Expérimentation&#8239;: une première version du système est testée en environnement de travail réel sur un périmètre restreint&#8239;;
+- Déploiement&#8239;: la solution est en cours de généralisation, les utilisateurs y ont accès et les bénéfices attendus sont vérifiés.
+
+Nota : *Si plusieurs phases sont menées simultanément (exemple : plusieurs versions logicielles en parallèle), la phase mobilisant le plus de ressources est retenue.*
+
+12. **Que signifie la zone fonctionnelle du projet ?**
+
+Une zone fonctionnelle correspond au premier niveau de découpage de la cartographie du SI des services publics français, dénommée «&#8239;Plan d'Occupation des Sols&#8239;» (<a href="http://references.modernisation.gouv.fr/sites/default/files/Plan%20d'Occupation%20des%20Sols%20du%20SI%20des%20Services%20Publics%20Fran%C3%A7ais%20V3.1.1.pdf" target="_blank" title="Plan d'occupation des sols">POS</a>). Chaque zone représente un ensemble cohérent de fonctionnalités et de données, assurées et gérées par le SI, au service des métiers de l'administration. Certaines zones sont propres à un ministère, comme la justice pénale pour le ministère de la Justice ; d’autres sont transverses : gestion des ressources humaines ou de la relation avec les usagers. (<a href="https://references.modernisation.gouv.fr/urbanisation-du-systeme-dinformation-de-letat" target="_blank" title="Les documents de référence du SI de l'Etat">En savoir plus sur l’urbanisation du système d'information de l'Etat</a>).
+
+13. **Pourquoi préciser le(s) programme(s) de financement du projet ?**
+
+Depuis l’entrée en vigueur de la loi organique relative aux lois de finances (LOLF), le budget général de l’Etat est réparti en missions et en programmes définissant le cadre de mise en œuvre des politiques publiques (<a href="http://www.performance-publique.budget.gouv.fr/cadre-gestion-publique/cadre-gestion-budgetaires/essentiel/cadre/nomenclatures-budget-etat-meilleure-identification-engagements-depenses#.WCwv57O01FT" target="_blank" title="Les nomenclatures du budget de l’État : une meilleure identification des engagements et des dépenses">en savoir plus</a>). Ainsi chaque projet SI est financé par un ou plusieurs programme(s) ou par un établissement public. La liste des missions et des programmes envisagés pour 2017 dans le projet de loi de finances est disponible sur le <a href="http://www.performance-publique.budget.gouv.fr/sites/performance_publique/files/farandole/ressources/2017/DOFP/DOFP_2017_Tome_02.pdf" target="_blank" title="RAPPORT SUR L’ÉVOLUTION DE L’ÉCONOMIE NATIONALE
+ET SUR LES ORIENTATIONS DES FINANCES PUBLIQUES">site de la performance</a>.
+
+14. **Pourquoi des liens vers les projets annuels de performances ?**
+
+Les <a href="http://www.performance-publique.budget.gouv.fr/budget-comptes-etat/volet-performance-budget-etat/approfondir/fondamentaux/projets-annuels-performances-pap#.WCwxALO01FT" target="_blank" title="Les projets annuels de performances (PAP)">projets annuels de performances</a> permettent de mieux rendre compte de la performance des missions de l’Etat. Ces documents, à destination des parlementaires, présentent également les grands projets informatiques de l’Etat. En ce sens, ils apportent des compléments d’information sur ces projets et notamment sur l’évolution de leur coût et de leur durée. (En savoir plus sur les <a href="http://www.performance-publique.budget.gouv.fr/sites/performance_publique/files/files/circulaires/pieces_jointes/2016/1BLF-16-3278/1BLF-16-3278_guide_performance.pdf" target="_blank" title="Guide de la performance">indicateurs de respect des coûts et délais des grands projets</a> et la <a href="http://www.performance-publique.budget.gouv.fr/sites/performance_publique/files/files/circulaires/annexes/2016/1BLF-16-3278/1BLF-16-3278_annexe4bis.pdf" target="_blank" title="Justification au premier euro des projets informatiques les plus importants">justification au premier euro des projets informatiques les plus importants</a>).
