@@ -152,16 +152,16 @@ plot_zone <- function(table) {
 
   gb_zone <- table %>%
     dplyr::group_by(zone_fonctionelle) %>%
-    dplyr::summarise(n = n())
+    dplyr::summarise(n = n()) %>%
+    dplyr::filter(is.na(zone_fonctionelle) == FALSE)
 
   hc_zone <- highcharter::highchart() %>%
-    highcharter::hc_chart(type = "bar") %>%
-    highcharter::hc_xAxis(categories = gb_zone) %>%
-    highcharter::hc_add_series_labels_values(
-      name = "Projets par zone fonctionnelle",
-      labels = gb_zone$zone_fonctionelle,
-      values = gb_zone$n
-      ) %>%
+    highcharter::hc_add_series(
+      data = gb_zone,
+      type = "bar",
+      mapping = highcharter::hcaes(x = zone_fonctionelle, y = n)
+    ) %>%
+    highcharter::hc_xAxis(categories = gb_zone$zone_fonctionelle) %>%
     highcharter::hc_legend(enabled = FALSE)
 
   return(hc_zone)
