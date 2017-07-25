@@ -7,8 +7,8 @@ output:
     navbar:
       - { title: "Data", icon: "fa-database", href: "https://www.data.gouv.fr/fr/datasets/panorama-des-grands-projets-si-de-letat-1/", target: "_blank"}
 params:
-  ecart_calendaire: ".38"
-  ecart_budgetaire: ".32"
+  ecart_calendaire: ".21"
+  ecart_budgetaire: ".25"
 ---
 
 Chiffres clés {data-icon="fa-tachometer" data-orientation="columns"}
@@ -23,6 +23,8 @@ Issu d’une collaboration étroite entre la DINSIC et les ministères, le panor
  
 Tout citoyen dispose ainsi d'une vue sur les principaux efforts consentis par l'Etat pour moderniser son système d’information et engager une transformation numérique. 
 
+Date d'actualisation : <b> Juin 2017</b>
+
 ```{r setup, include=FALSE}
 Sys.setlocale(locale="fr_FR.UTF-8")
 options(OutDec = ",")
@@ -31,7 +33,7 @@ library(readr)
 library(knitr)
 library(dplyr)
 library(PanoramaSI)
-table_panorama <- import_table(path = "raw-data/panorama_projets_si.csv", n = 57)
+table_panorama <- import_table(path = "raw-data/Panorama_des_grands_projets_SI_-_20170630.csv", n = 61)
 ```
 
 ### projets suivis {.value-box}
@@ -164,7 +166,7 @@ Il s’agit ainsi notamment des projets&#8239;:
 - ayant un contenu et/ou une gestion complexe ou des risques majeurs identifiés&#8239;;
 - visant des économies substantielles ou entraînant des dépenses supérieures à 9M€. 
 
-La première édition du panorama, publiée en novembre 2016, contient 57 projets.
+La première édition du panorama, publiée en novembre 2016, contenait 57 projets.
 
 3. **Comment est établi ce panorama ?**
 
