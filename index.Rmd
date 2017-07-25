@@ -33,7 +33,7 @@ library(readr)
 library(knitr)
 library(dplyr)
 library(PanoramaSI)
-table_panorama <- import_table(path = "raw-data/Panorama_des_grands_projets_SI_-_20170630.csv", n = 61)
+table_panorama <- import_table(path = "raw-data/panorama_projets_si_20170629113508bis.csv", n = 61)
 ```
 
 ### projets suivis {.value-box}
