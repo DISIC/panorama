@@ -17,7 +17,8 @@ Imports:
     DT,
     stringr,
     highcharter,
-    tidyr
+    tidyr,
+    readxl
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown

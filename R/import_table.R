@@ -12,8 +12,7 @@
 #'
 
 import_table <- function(path, n) {
-  readr::read_csv(file = path) %>%
-    dplyr::slice(1:n) %>%
+  readxl::read_excel(path = path) %>%
     dplyr::select(
       ministere_porteur = `Ministère porteur`,
       ministere_nom_complet = `Ministère nom complet`,
