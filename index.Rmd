@@ -29,7 +29,6 @@ Date d'actualisation : <b> Juin 2017</b>
 Sys.setlocale(locale="fr_FR.UTF-8")
 options(OutDec = ",")
 library(flexdashboard)
-library(readr)
 library(knitr)
 library(dplyr)
 library(PanoramaSI)

@@ -1,8 +1,8 @@
 #' Count the number of projects
 #'
-#' @param table the name of the table
+#' @param table a data frame
 #'
-#' @return a scalar value
+#' @return a scalar
 #' @export
 #'
 #' @examples
@@ -14,7 +14,7 @@ n_projects <- function(table) {
 
 #' Total cost of all projects
 #'
-#' @param table
+#' @param table a data frame
 #'
 #' @return a string with the total cost of the projects
 #' @export
@@ -29,13 +29,14 @@ euros <- function(table) {
 
 #' Nombre de projets interministériels
 #'
-#' @param table
+#' @param table a data frame
 #'
 #' @return a number
 #' @export
 #'
 #' @examples
 #' interministeriel(table = table_panorama)
+#'
 
 interministeriel <- function(table) {
   table %>%
@@ -46,14 +47,14 @@ interministeriel <- function(table) {
 
 #' Durée moyenne des projets (en années)
 #'
-#' @param table
+#' @param table a data frame
 #'
 #' @return a formatted number
 #' @export
 #'
 #' @examples
 #' duree_moyenne(table = table_panorama)
-
+#'
 duree_moyenne <- function(table) {
   table %>%
     .$duree %>%
@@ -61,4 +62,3 @@ duree_moyenne <- function(table) {
     round(., digits = 1) %>%
     french_formatting()
   }
-

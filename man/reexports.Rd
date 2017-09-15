@@ -4,8 +4,6 @@
 \name{reexports}
 \alias{reexports}
 \alias{\%>\%}
-\alias{reexports}
-\alias{uq}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -13,8 +11,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{lazyeval}{\code{\link[lazyeval]{uq}}}
-
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 }}
 

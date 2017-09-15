@@ -2,7 +2,6 @@
 #'
 #'
 #' @param path the path to the data
-#' @param n the number of lines to read
 #'
 #' @return a tibble
 #' @export
@@ -11,7 +10,7 @@
 #' table_panorama <- import_table(path = "raw-data/panorama_projets_si.csv", n = 56)
 #'
 
-import_table <- function(path, n) {
+import_table <- function(path) {
   readxl::read_excel(path = path) %>%
     dplyr::select(
       ministere_porteur = `Ministère porteur`,

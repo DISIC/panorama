@@ -32,7 +32,7 @@ plot_tranchebudget <- function(table) {
 
 #' Bar chart by phase
 #'
-#' @param table the name of the input tabl
+#' @param table a data frame
 #'
 #' @return a hichchart
 #' @export
@@ -83,7 +83,7 @@ plot_phase <- function(table) {
 
 #' Bar chart by budget
 #'
-#' @param table
+#' @param table a data frame
 #'
 #' @return a highchart
 #' @export
@@ -140,7 +140,7 @@ plot_budget <- function(table) {
 
 #' Bar chart by zone
 #'
-#' @param table
+#' @param table a data frame
 #'
 #' @return a highchart
 #' @export

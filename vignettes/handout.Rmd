@@ -70,11 +70,5 @@ plot_zone(table = table_panorama)
 make_html_table(table = table_panorama)
 ```
 
-## Générer le site 
-
-```{r, eval=FALSE}
-library(rmarkdown)
-render(input = "../index.Rmd")
-```
 
 
