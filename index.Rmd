@@ -26,8 +26,6 @@ Tout citoyen dispose ainsi d'une vue sur les principaux efforts consentis par l'
 Date d'actualisation : <b> Juin 2017</b>
 
 ```{r setup, include=FALSE}
-Sys.setlocale(locale="fr_FR.UTF-8")
-options(OutDec = ",")
 library(flexdashboard)
 library(knitr)
 library(dplyr)
