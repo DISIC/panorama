@@ -14,36 +14,36 @@ make_html_table <- function(table) {
     dplyr::mutate(
       debut = format(debut, "%B %Y"),
       date_de_publication = format(date_de_publication, "%B %Y"),
-      en_savoir_plus = stringr::str_replace(
-        string = en_savoir_plus,
+      en_savoir_plus_sur_le_projet = stringr::str_replace(
+        string = en_savoir_plus_sur_le_projet,
         pattern = "^(http[s]?://[[:alpha:]\\.\\-]+) ;.*",
         replacement = "\\1"
       ),
       pap = stringr::str_replace(
-        string = pap,
+        string = lien_vers_les_projets_annuels_de_performances,
         pattern = "^(http[s]?://[[:alpha:]\\.\\-]+) ;.*",
         replacement = "\\1"
       ),
       description = ifelse(
-        is.na(en_savoir_plus),
-        description,
-        paste0(description, " (<a href=\"", en_savoir_plus, "\" target=\"_blank\" title=\"en savoir plus\">en savoir plus</a>)")
+        is.na(en_savoir_plus_sur_le_projet),
+        description_et_objectifs_du_projet,
+        paste0(description_et_objectifs_du_projet, " (<a href=\"", en_savoir_plus_sur_le_projet, "\" target=\"_blank\" title=\"en savoir plus\">en savoir plus</a>)")
       ),
     financement = ifelse(
-      is.na(pap), financement,
-      paste0("<a href=\"", pap, "\" target=\"_blank\" title=\"projet annuel de performance\">", financement, "</a>")
+      is.na(pap), financement_programme_s_,
+      paste0("<a href=\"", pap, "\" target=\"_blank\" title=\"projet annuel de performance\">", financement_programme_s_, "</a>")
     )
     ) %>%
     dplyr::select(
-      "Projet" = nom_projet,
+      "Projet" = nom_du_projet,
       "Ministère porteur" = ministere_nom_complet,
       "Projet inter-ministériel" = projet_interministeriel,
       "Description et objectifs" = description,
       "Début" = debut,
       "Durée du projet en années" = duree,
-      "Phase du projet en cours" = phase,
+      "Phase du projet en cours" = cout_estime_par_tranche,
       "Coût estimé" = budget_complet,
-      "Zone fonctionnelle principale" = zone_fonctionelle,
+      "Zone fonctionnelle principale" = zone_fonctionnelle,
       "Programme de financement" = financement
     )
 

@@ -12,7 +12,7 @@
 #'
 plot_tranchebudget <- function(table) {
   gb_tranche <- table %>%
-    dplyr::group_by(budget_tranche) %>%
+    dplyr::group_by(cout_estime_par_tranche) %>%
     dplyr::summarise(
       n = n()
       )
@@ -20,7 +20,7 @@ plot_tranchebudget <- function(table) {
 
   hc_tranche <- highcharter::highchart() %>%
     highcharter::hc_add_series_labels_values(
-      gb_tranche$budget_tranche,
+      gb_tranche$cout_estime_par_tranche,
       gb_tranche$n,
       name = "Tranche budgétaire",
       colorByPoint = TRUE,
@@ -42,12 +42,12 @@ plot_tranchebudget <- function(table) {
 
 plot_phase <- function(table) {
   gb_phase <- table %>%
-    dplyr::group_by(ministere_nom_complet, phase) %>%
+    dplyr::group_by(ministere_nom_complet, phase_du_projet_en_cours) %>%
     dplyr::summarise(
       n = n()
       ) %>%
-    dplyr::filter(is.na(phase) == FALSE) %>%
-    tidyr::spread(phase, n, fill = 0)
+    dplyr::filter(is.na(phase_du_projet_en_cours) == FALSE) %>%
+    tidyr::spread(phase_du_projet_en_cours, n, fill = 0)
 
   hc_phase <- highcharter::highchart() %>%
     highcharter::hc_chart(type = "bar") %>%
@@ -93,9 +93,9 @@ plot_phase <- function(table) {
 
 plot_budget <- function(table) {
   gb_budget <- table %>%
-    dplyr::group_by(ministere_nom_complet, budget_tranche) %>%
+    dplyr::group_by(ministere_nom_complet, cout_estime_par_tranche) %>%
     dplyr::summarise(n = n()) %>%
-    tidyr::spread(budget_tranche, n, fill = 0)
+    tidyr::spread(cout_estime_par_tranche, n, fill = 0)
 
   hc_budget <- highcharter::highchart() %>%
     highcharter::hc_chart(type = "bar") %>%
@@ -151,17 +151,17 @@ plot_budget <- function(table) {
 plot_zone <- function(table) {
 
   gb_zone <- table %>%
-    dplyr::group_by(zone_fonctionelle) %>%
+    dplyr::group_by(zone_fonctionnelle) %>%
     dplyr::summarise(n = n()) %>%
-    dplyr::filter(is.na(zone_fonctionelle) == FALSE)
+    dplyr::filter(is.na(zone_fonctionnelle) == FALSE)
 
   hc_zone <- highcharter::highchart() %>%
     highcharter::hc_add_series(
       data = gb_zone,
       type = "bar",
-      mapping = highcharter::hcaes(x = zone_fonctionelle, y = n)
+      mapping = highcharter::hcaes(x = zone_fonctionnelle, y = n)
     ) %>%
-    highcharter::hc_xAxis(categories = gb_zone$zone_fonctionelle) %>%
+    highcharter::hc_xAxis(categories = gb_zone$zone_fonctionnelle) %>%
     highcharter::hc_legend(enabled = FALSE)
 
   return(hc_zone)
