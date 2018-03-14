@@ -52,6 +52,12 @@ plot_phase <- function(table) {
   hc_phase <- highcharter::highchart() %>%
     highcharter::hc_chart(type = "bar") %>%
     highcharter::hc_xAxis(categories = gb_phase$ministere_nom_complet) %>%
+#Ajout projets terminés
+    highcharter::hc_add_series(
+      name = "Terminé",
+      data = gb_phase$"Terminé",
+      color = palette_phase()[5]
+    ) %>%
     highcharter::hc_add_series(
       name = "Déploiement",
       data = gb_phase$"Déploiement",
@@ -69,7 +75,7 @@ plot_phase <- function(table) {
     ) %>%
     highcharter::hc_add_series(
       name = "Cadrage",
-      data = gb_phase$Cadrage,
+      data = gb_phase$'Cadrage',
       color = palette_phase()[1]
     ) %>%
     highcharter::hc_plotOptions(
@@ -127,7 +133,7 @@ plot_budget <- function(table) {
     ) %>%
     highcharter::hc_add_series(
       name = "En cadrage",
-      data = gb_budget$'En cadrage',
+      data = gb_budget$'NA',
       color = palette_budget()[6]
     ) %>%
     highcharter::hc_plotOptions(
