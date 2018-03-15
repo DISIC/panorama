@@ -31,7 +31,7 @@ library(knitr)
 library(dplyr)
 library(tricky)
 library(PanoramaSI)
-table_panorama <- import_table(path = "raw-data/Export.xlsx")
+table_panorama <- import_table(path = "raw-data/export.xlsx")
 ```
 
 ### projets suivis {.value-box}

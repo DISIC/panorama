@@ -19,22 +19,15 @@ make_html_table <- function(table) {
         pattern = "^(http[s]?://[[:alpha:]\\.\\-]+) ;.*",
         replacement = "\\1"
       ),
-# Suppression du lien vers les PAP dans l'attente de leur réalignement
-#        pap = stringr::str_replace(
-#        string = lien_vers_les_projets_annuels_de_performances,
-#        pattern = "^(http[s]?://[[:alpha:]\\.\\-]+) ;.*",
-#        replacement = "\\1"
-#      ),
       description = ifelse(
         is.na(en_savoir_plus_sur_le_projet),
         description_et_objectifs_du_projet,
-        paste0(description_et_objectifs_du_projet, " (<a href=\"", en_savoir_plus_sur_le_projet, "\" target=\"_blank\" title=\"en savoir plus\">en savoir plus</a>)")
-      ),
-# Suppression du lien vers les PAP dans l'attente de leur réalignement
-# financement = ifelse(
-#      is.na(pap), financement_programme_s_,
-#      paste0("<a href=\"", pap, "\" target=\"_blank\" title=\"projet annuel de performance\">", financement_programme_s_, "</a>")
-#    )
+        paste0(description_et_objectifs_du_projet,
+               " (<a href=\"",
+               en_savoir_plus_sur_le_projet,
+               "\" target=\"_blank\" title=\"en savoir plus\">en savoir plus</a>)"
+               )
+      )
     ) %>%
     dplyr::select(
       "Projet" = nom_du_projet,
