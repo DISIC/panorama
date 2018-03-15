@@ -19,7 +19,8 @@ palette_sgmap <- function() {
 #' palette_budget()
 
 palette_budget <- function() {
-  c(scales::gradient_n_pal(colours = c("white", "#83187a"))((1:5)/5), "lightgrey")
+  c(scales::gradient_n_pal(colours = c("white", "#83187a"))((1:6)/6))
+  #c(scales::gradient_n_pal(colours = c("white", "#83187a"))((1:6)/6), "lightgrey")
   }
 
 #' Color palettes for phase
@@ -31,6 +32,6 @@ palette_budget <- function() {
 #' palette_phase()
 #'
 palette_phase <- function() {
-  scales::gradient_n_pal(colours = c("white", palette_sgmap()["blue"]))((1:4)/4)
+  scales::gradient_n_pal(colours = c("white", palette_sgmap()["blue"]))((1:5)/5)
   }
 

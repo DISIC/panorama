@@ -13,19 +13,19 @@
 plot_tranchebudget <- function(table) {
   gb_tranche <- table %>%
     dplyr::group_by(cout_estime_par_tranche) %>%
-    dplyr::summarise(
+     dplyr::summarise(
       n = n()
       )
   gb_tranche <- gb_tranche[c(1,5,6,4,2,3), ]
 
   hc_tranche <- highcharter::highchart() %>%
-    highcharter::hc_add_series_labels_values(
-      gb_tranche$cout_estime_par_tranche,
-      gb_tranche$n,
-      name = "Tranche budgétaire",
-      colorByPoint = TRUE,
-      type = "pie",
-      colors = palette_budget())
+  highcharter::hc_add_series_labels_values(
+  gb_tranche$cout_estime_par_tranche,
+  gb_tranche$n,
+  name = "Nombre de projets",
+  colorByPoint = TRUE,
+  type = "pie",
+  colors = palette_budget())
 
   return(hc_tranche)
   }
@@ -109,32 +109,32 @@ plot_budget <- function(table) {
     highcharter::hc_add_series(
       name = ">100 M€",
       data = gb_budget$'> 100 M€',
-      color = palette_budget()[5]
+      color = palette_budget()[6]
     ) %>%
     highcharter::hc_add_series(
       name = "entre 20 et 100 M€",
       data = gb_budget$'entre 20 et 100 M€',
-      color = palette_budget()[4]
+      color = palette_budget()[5]
     ) %>%
     highcharter::hc_add_series(
       name = "entre 9 et 20 M€",
       data = gb_budget$'entre 9 et 20 M€',
-      color = palette_budget()[3]
+      color = palette_budget()[4]
     ) %>%
     highcharter::hc_add_series(
       name = "entre 5 et 9 M€",
       data = gb_budget$'entre 5 et 9 M€',
-      color = palette_budget()[2]
+      color = palette_budget()[3]
     ) %>%
     highcharter::hc_add_series(
       name = "< 5 M€",
       data = gb_budget$'< 5 M€',
-      color = palette_budget()[1]
+      color = palette_budget()[2]
     ) %>%
     highcharter::hc_add_series(
       name = "En cadrage",
       data = gb_budget$'NA',
-      color = palette_budget()[6]
+      color = palette_budget()[1]
     ) %>%
     highcharter::hc_plotOptions(
       series = list(stacking="normal")
@@ -163,6 +163,7 @@ plot_zone <- function(table) {
 
   hc_zone <- highcharter::highchart() %>%
     highcharter::hc_add_series(
+      name = "Nombre de projets",
       data = gb_zone,
       type = "bar",
       mapping = highcharter::hcaes(x = zone_fonctionnelle, y = n)
