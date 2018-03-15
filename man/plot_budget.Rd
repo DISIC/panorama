@@ -7,7 +7,7 @@
 plot_budget(table)
 }
 \arguments{
-\item{table}{}
+\item{table}{a data frame}
 }
 \value{
 a highchart

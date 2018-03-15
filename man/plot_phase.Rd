@@ -7,7 +7,7 @@
 plot_phase(table)
 }
 \arguments{
-\item{table}{the name of the input tabl}
+\item{table}{a data frame}
 }
 \value{
 a hichchart

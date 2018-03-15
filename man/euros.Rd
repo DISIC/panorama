@@ -7,7 +7,7 @@
 euros(table)
 }
 \arguments{
-\item{table}{}
+\item{table}{a data frame}
 }
 \value{
 a string with the total cost of the projects

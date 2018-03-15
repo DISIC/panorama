@@ -29,6 +29,7 @@ Date d'actualisation : <b> Mars 2018 </b>
 library(flexdashboard)
 library(knitr)
 library(dplyr)
+library(tibble)
 library(tricky)
 library(PanoramaSI)
 table_panorama <- import_table(path = "raw-data/export.xlsx")

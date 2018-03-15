@@ -7,7 +7,7 @@
 duree_moyenne(table)
 }
 \arguments{
-\item{table}{}
+\item{table}{a data frame}
 }
 \value{
 a formatted number
@@ -17,4 +17,5 @@ Durée moyenne des projets (en années)
 }
 \examples{
 duree_moyenne(table = table_panorama)
+
 }

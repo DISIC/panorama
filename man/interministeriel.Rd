@@ -7,7 +7,7 @@
 interministeriel(table)
 }
 \arguments{
-\item{table}{}
+\item{table}{a data frame}
 }
 \value{
 a number
@@ -17,4 +17,5 @@ Nombre de projets interministériels
 }
 \examples{
 interministeriel(table = table_panorama)
+
 }

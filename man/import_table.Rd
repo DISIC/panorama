@@ -4,12 +4,10 @@
 \alias{import_table}
 \title{Import the data into R}
 \usage{
-import_table(path, n)
+import_table(path)
 }
 \arguments{
 \item{path}{the path to the data}
-
-\item{n}{the number of lines to read}
 }
 \value{
 a tibble

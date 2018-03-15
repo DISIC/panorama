@@ -7,10 +7,10 @@
 n_projects(table)
 }
 \arguments{
-\item{table}{the name of the table}
+\item{table}{a data frame}
 }
 \value{
-a scalar value
+a scalar
 }
 \description{
 Count the number of projects
