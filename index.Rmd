@@ -20,8 +20,16 @@ Column {data-width=500}
 ### Présentation
 
 Issu d’une collaboration étroite entre la DINSIC et les ministères, le panorama des grands projets SI recense et décrit les principaux projets informatiques au sein de l’Etat.
+
+Le panorama inclut en priorité les projets qui requièrent un suivi particulier en raison de leurs impacts, de leur degré de complexité et/ou de leurs enjeux financiers.
+
+Il intègre notamment tous les nouveaux projets dont le coût estimé global (prenant en compte la construction de la solution ainsi que deux années de maintenance) dépasse 9 M€. Les projets répondant à cette caractéristique sont par ailleurs soumis au DINSIC pour avis conforme à l’issue de leur phase de cadrage, et peuvent à cette occasion faire l’objet de recommandations partagées avec les cabinets ministériels.
  
-Tout citoyen dispose ainsi d'une vue sur les principaux efforts consentis par l'Etat pour moderniser son système d’information et engager une transformation numérique. 
+Cet outil d’information et de pilotage, conçu à l'origine pour le Premier ministre, repose sur un cadre harmonisé de suivi des grands projets. Il est utilisé pour prioriser les missions d'appui auprès des ministères, qui se le sont également approprié pour leurs propres besoins de pilotage.
+
+Le panorama est également une aide pour la DINSIC dans sa mission de sécurisation des projets informatiques. L'enjeu de sécurisation des projets est de taille pour l’Etat, comme pour toutes les grandes organisations qui mènent des chantiers d’ampleur.
+
+Tout citoyen dispose ainsi d'une vue sur les principaux efforts consentis par l'Etat pour moderniser son système d’information et engager une transformation numérique. Toutes ces informations sont également disponibles en open data sur la plate-forme  <a href="https://www.data.gouv.fr/fr/datasets/panorama-des-grands-projets-si-de-letat-1/" target="_blank" title="data.gouv.fr">data.gouv.fr</a>.
 
 Date d'actualisation : <b> Mars 2018 </b>
 
@@ -29,10 +37,9 @@ Date d'actualisation : <b> Mars 2018 </b>
 library(flexdashboard)
 library(knitr)
 library(dplyr)
-library(tibble)
 library(tricky)
 library(PanoramaSI)
-table_panorama <- import_table(path = "raw-data/export.xlsx")
+table_panorama <- import_table(path = "raw-data/Export.xlsx")
 ```
 
 ### projets suivis {.value-box}
@@ -169,7 +176,7 @@ La première édition du panorama, publiée en novembre 2016, contenait 57 proje
 
 3. **Comment est établi ce panorama ?**
 
-Le panorama est issu d’une collaboration étroite entre les ministères et la direction interministérielle du numérique et du système d’information et de communication de l’Etat (DINSIC), au sein du secrétariat général pour la modernisation de l’action publique (SGMAP).
+Le panorama est issu d’une collaboration étroite entre les ministères et la direction interministérielle du numérique et du système d’information et de communication de l’Etat (DINSIC).
 
 Chaque ministère identifie, parmi les projets qu’il porte, ceux répondant aux critères (Cf. question 2). La DINSIC recueille, dans un cadre homogène, les données de ces projets afin de les publier sur <a href="http://modernisation.gouv.fr/" target="_blank" title="Portail de la modernisation de l'action publique">modernisation.gouv.fr</a> et <a href="https://www.data.gouv.fr/fr/" titre="data.gouv.fr" target="_blank">data.gouv.fr</a>.
 
@@ -181,7 +188,7 @@ Les données du panorama sont actualisées plusieurs fois par an.
 
 L'Etat est engagé dans une démarche de modernisation en profondeur des systèmes d’information des administrations, au bénéfice des usagers comme des agents et dans une optique d’optimisation des dépenses. Pour gagner en efficacité et efficience, il a instauré à travers le <a href="https://www.legifrance.gouv.fr/affichTexte.do;jsessionid=17BAD420544A1B373E5FB2913C908A1B.tpdila10v_1?cidTexte=JORFTEXT000029337021&dateTexte=20140806" target="_blank" title="décret n° 2014-879 du 1er août 2014">décret n° 2014-879 du 1er août 2014</a>, un système d’information unique de l’Etat, placé sous l’autorité du Premier ministre.
 
-Son pilotage a été confié à la direction interministérielle du numérique et du système d’information et de communication de l’Etat (DINSIC) une direction du secrétariat général pour la modernisation de l’action publique (SGMAP). La DINSIC a alors été chargée de doter le gouvernement des instruments nécessaires au pilotage – notamment financier – du SI de l'Etat.
+Son pilotage a été confié à la direction interministérielle du numérique et du système d’information et de communication de l’Etat (DINSIC). La DINSIC a alors été chargée de doter le gouvernement des instruments nécessaires au pilotage – notamment financier – du SI de l'Etat.
 
 Dans ce cadre, le Premier ministre a demandé à la DINSIC, dans une <a href="http://circulaires.legifrance.gouv.fr/pdf/2015/01/cir_39141.pdf" target="_blank" title="circulaire de janvier 2015">circulaire de janvier 2015</a>, de bâtir un tableau de bord des grands projets SI dans les ministères, en précisant que ces projets devront faire «&#8239;l’objet d’une vigilance accrue et d’une sécurisation de la part de la DINSIC&#8239;». Le panorama publié ici en est la concrétisation.
 
