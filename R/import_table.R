@@ -17,7 +17,7 @@ import_table <- function(path) {
     tricky::set_standard_names() %>%
     dplyr::mutate(
       debut = lubridate::dmy(debut),
-      duree = as.numeric( duree_previsionnelle_en_annee),
-      budget_complet = readr::parse_number(cout_estime)
+      duree = tricky::unfrench_formatting(duree_previsionnelle_en_annee),
+      budget_complet = tricky::unfrench_formatting(cout_estime)
     )
   }

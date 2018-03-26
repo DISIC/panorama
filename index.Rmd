@@ -19,17 +19,11 @@ Column {data-width=500}
 
 ### Présentation
 
-Issu d’une collaboration étroite entre la DINSIC et les ministères, le panorama des grands projets SI recense et décrit les principaux projets informatiques au sein de l’Etat.
+Issu d’une collaboration étroite entre la DINSIC et les ministères, le panorama des grands projets SI recense et décrit les principaux projets informatiques au sein de l’Etat. Il inclut en priorité les projets qui requièrent un suivi particulier en raison de leurs impacts, de leur degré de complexité et/ou de leurs enjeux financiers, notamment ceux dont le coût estimé global.
 
-Le panorama inclut en priorité les projets qui requièrent un suivi particulier en raison de leurs impacts, de leur degré de complexité et/ou de leurs enjeux financiers.
+Conçu à l’origine pour le Premier ministre, cet outil d’information et de pilotage permet à la DINSIC d’assurer sa mission de sécurisation des projets informatiques. Il est utilisé pour prioriser les missions d’appui auprès des ministères, qui se le sont également approprié pour leurs propres besoins de pilotage.
 
-Il intègre notamment tous les nouveaux projets dont le coût estimé global (prenant en compte la construction de la solution ainsi que deux années de maintenance) dépasse 9 M€. Les projets répondant à cette caractéristique sont par ailleurs soumis au DINSIC pour avis conforme à l’issue de leur phase de cadrage, et peuvent à cette occasion faire l’objet de recommandations partagées avec les cabinets ministériels.
- 
-Cet outil d’information et de pilotage, conçu à l'origine pour le Premier ministre, repose sur un cadre harmonisé de suivi des grands projets. Il est utilisé pour prioriser les missions d'appui auprès des ministères, qui se le sont également approprié pour leurs propres besoins de pilotage.
-
-Le panorama est également une aide pour la DINSIC dans sa mission de sécurisation des projets informatiques. L'enjeu de sécurisation des projets est de taille pour l’Etat, comme pour toutes les grandes organisations qui mènent des chantiers d’ampleur.
-
-Tout citoyen dispose ainsi d'une vue sur les principaux efforts consentis par l'Etat pour moderniser son système d’information et engager une transformation numérique. Toutes ces informations sont également disponibles en open data sur la plate-forme  <a href="https://www.data.gouv.fr/fr/datasets/panorama-des-grands-projets-si-de-letat-1/" target="_blank" title="data.gouv.fr">data.gouv.fr</a>.
+Sa publication en ligne offre à tout citoyen une vue sur les principaux investissements de l’Etat pour moderniser son système d’information et mener la transformation numérique au bénéfice de tous. Ces informations sont également disponibles en open data sur la plate-forme <a href="https://www.data.gouv.fr/fr/datasets/panorama-des-grands-projets-si-de-letat-1/" target="_blank" title="data.gouv.fr">data.gouv.fr</a>.
 
 Date d'actualisation : <b> Mars 2018 </b>
 
@@ -39,7 +33,7 @@ library(knitr)
 library(dplyr)
 library(tricky)
 library(PanoramaSI)
-table_panorama <- import_table(path = "raw-data/Export.xlsx")
+table_panorama <- import_table(path = "raw-data/export.xlsx")
 ```
 
 ### projets suivis {.value-box}
