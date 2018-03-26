@@ -8,7 +8,7 @@ output:
       - { title: "Data", icon: "fa-database", href: "https://www.data.gouv.fr/fr/datasets/panorama-des-grands-projets-si-de-letat-1/", target: "_blank"}
 params:
   ecart_calendaire: ".29"
-  ecart_budgetaire: ".264"
+  ecart_budgetaire: ".26"
 ---
 
 Chiffres clés {data-icon="fa-tachometer" data-orientation="columns"}
