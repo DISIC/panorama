@@ -21,7 +21,7 @@ Pour importer des données, il faut convertir le fichier Excel au format CSV et 
 ```{r}
 library(PanoramaSI)
 library(dplyr)
-table_panorama <- import_table(path = "../raw-data/Export2.xlsx")
+table_panorama <- import_table(path = "../raw-data/export.xlsx")
 ```
 
 ## Chiffres clés 
